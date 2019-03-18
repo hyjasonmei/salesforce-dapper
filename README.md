@@ -1,5 +1,7 @@
 # salesforce-dapper
 
+1. import this project
+2. sample demo :
 ```csharp
 class Program
     {
