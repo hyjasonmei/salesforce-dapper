@@ -1,7 +1,10 @@
 # salesforce-dapper
 
-1. import this project
-2. sample demo :
+A sample library to CRUD Salesforce data. Using Salesforce REST API.
+
+## Setup
+
+import this project
 
 ## Initial
 
@@ -40,3 +43,19 @@ class Program
 }
 ```
 
+## Create 
+```csharp
+var newAccount = new { Name = "test account" };
+var result = dapper.Create("Account", newAccount);
+```
+
+## Update
+```csharp
+var updateAccount = new { Name = "updated account name" };
+var result = dapper.Update("{ ACCOUNT ID }", "Account", updateAccount);
+```
+
+## Delete
+```csharp
+var result = dapper.Delete("{ ACCOUNT ID }", "Account");
+```
