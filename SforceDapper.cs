@@ -46,5 +46,74 @@ namespace SforceDapper
             }
             return resultT;
         }
+
+        public Response Create(string objectName, object body)
+        {
+            var http = new Http();
+            var url = _session.instance_url + "/services/data/v20.0/sobjects/" + objectName + "/";
+            var result = http.Post(url, _session.access_token, body);
+            if (result.IsSuccess)
+            {
+                var saveResult = (Response)JsonConvert.DeserializeObject(result.Body, typeof(Response));
+                return saveResult;
+            }
+            else
+            {
+                var errors = (List<Error>)JsonConvert.DeserializeObject(result.Body, typeof(List<Error>));
+                return new Response()
+                {
+                    errors = errors,
+                    success = false
+                };
+            }
+        }
+
+        public Response Update(string id, string objectName, object body)
+        {
+            var http = new Http();
+            var url = _session.instance_url + "/services/data/v20.0/sobjects/" + objectName + "/" + id;
+            var result = http.Patch(url, _session.access_token, body);
+            if (result.IsSuccess)
+            {
+                var saveResult = (Response)JsonConvert.DeserializeObject(result.Body, typeof(Response));
+                return new Response()
+                {
+                    success = true
+                }; ;
+            }
+            else
+            {
+                var errors = (List<Error>)JsonConvert.DeserializeObject(result.Body, typeof(List<Error>));
+                return new Response()
+                {
+                    errors = errors,
+                    success = false
+                };
+            }
+        }
+
+        public Response Delete(string id, string objectName)
+        {
+            var http = new Http();
+            var url = _session.instance_url + "/services/data/v20.0/sobjects/" + objectName + "/" + id;
+            var result = http.Delete(url, _session.access_token);
+            if (result.IsSuccess)
+            {
+                var saveResult = (Response)JsonConvert.DeserializeObject(result.Body, typeof(Response));
+                return new Response()
+                {
+                    success = true
+                }; ;
+            }
+            else
+            {
+                var errors = (List<Error>)JsonConvert.DeserializeObject(result.Body, typeof(List<Error>));
+                return new Response()
+                {
+                    errors = errors,
+                    success = false
+                };
+            }
+        }
     }
 }

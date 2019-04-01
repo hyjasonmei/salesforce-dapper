@@ -45,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Error.cs" />
+    <Compile Include="Models\HttpResponse.cs" />
+    <Compile Include="Models\Response.cs" />
     <Compile Include="Models\SforceQueryResult.cs" />
     <Compile Include="Models\SforceSession.cs" />
     <Compile Include="Services\Salesforce.cs" />
